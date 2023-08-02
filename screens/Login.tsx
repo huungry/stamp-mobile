@@ -1,8 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext, useState } from 'react';
-import { Alert, Button, Image, KeyboardAvoidingView, Platform, StyleSheet, TextInput } from 'react-native';
-import { RootStackParamList } from './App';
-import { AuthContext } from './AuthContext';
+import { Alert, Button, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { RootStackParamList } from '../App';
+import { AuthContext } from '../AuthContext';
+import { login } from '../api/AuthService';
+import InputField from '../components/InputField';
+import styles from '../styles/LoginScreenStyles';
 
 type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
 
@@ -23,26 +26,13 @@ const LoginScreen = ({ navigation }: Props) => {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch('http://192.168.0.185:9000/auth/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'accept': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          password,
-        }),
-      });
-
-      const data = await response.json();
+      const { response, data } = await login(email, password);
 
       if (response.ok) {
         setToken(data.token);
         Alert.alert('Login Successful', 'You have successfully logged in!');
-        navigation.navigate('Home');
+        navigation.navigate('RestaurantList');
       } else {
-        console.log("not ok");
         Alert.alert('Login Failed', data.message || 'Login failed. Please try again.');
       }
     } catch (error) {
@@ -55,46 +45,21 @@ const LoginScreen = ({ navigation }: Props) => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <Image source={require('./assets/logo.png')} style={styles.logo} />
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
+      <Image source={require('../assets/logo.png')} style={styles.logo} />
+      <InputField
         value={email}
+        placeholder="Email"
         onChangeText={(text) => setEmail(text)}
       />
-      <TextInput
-        style={styles.input}
+      <InputField
+        value={password}
         placeholder="Password"
         secureTextEntry={true}
-        value={password}
         onChangeText={(text) => setPassword(text)}
       />
       <Button title="Login" onPress={handleLogin} />
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#D1C5A5',
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 20,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
-});
 
 export default LoginScreen;

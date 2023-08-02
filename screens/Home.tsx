@@ -1,8 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext, useState } from 'react';
-import { Alert, Button, Image, KeyboardAvoidingView, Platform, StyleSheet, TextInput } from 'react-native';
-import { RootStackParamList } from './App';
-import { AuthContext } from './AuthContext';
+import { Alert, Button, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { RootStackParamList } from '../App';
+import { AuthContext } from '../AuthContext';
+import { createRestaurant } from '../api/RestaurantService';
+import InputField from '../components/InputField';
+import styles from '../styles/HomeScreenStyles';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
 
@@ -24,20 +27,7 @@ const HomeScreen = ({ navigation }: Props) => {
 
   const handleCreateRestaurant = async () => {
     try {
-      const response = await fetch('http://192.168.0.185:9000/restaurants', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`, // Add the Authorization header with the token
-          'Content-Type': 'application/json',
-          'accept': 'application/json',
-        },
-        body: JSON.stringify({
-          email,
-          name
-        }),
-      });
-
-      const data = await response.json();
+      const { response, data } = await createRestaurant(token, email, name);
 
       if (response.ok) {
         Alert.alert('Restaurant Created', 'The restaurant was created successfully!');
@@ -59,17 +49,15 @@ const HomeScreen = ({ navigation }: Props) => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <Image source={require('./assets/restaurant.png')} style={styles.logo} />
-      <TextInput
-        style={styles.input}
-        placeholder="Restaurant email"
+      <Image source={require('../assets/restaurant.png')} style={styles.logo} />
+      <InputField
         value={email}
+        placeholder="Restaurant email"
         onChangeText={(text) => setemail(text)}
       />
-      <TextInput
-        style={styles.input}
-        placeholder="Restaurant name"
+      <InputField
         value={name}
+        placeholder="Restaurant name"
         onChangeText={(text) => setname(text)}
       />
       <Button title="Create Restaurant" onPress={handleCreateRestaurant} />
@@ -77,28 +65,5 @@ const HomeScreen = ({ navigation }: Props) => {
     </KeyboardAvoidingView>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    padding: 20,
-    backgroundColor: '#D1C5A5',
-  },
-  logo: {
-    width: 150,
-    height: 150,
-    marginBottom: 20,
-  },
-  input: {
-    width: '100%',
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    marginBottom: 10,
-    paddingHorizontal: 10,
-  },
-});
 
 export default HomeScreen;
