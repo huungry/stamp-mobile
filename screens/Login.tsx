@@ -31,7 +31,6 @@ const LoginScreen = ({ navigation }: Props) => {
 
       if (response.ok) {
         setToken(data.token);
-        Alert.alert('Login Successful', 'You have successfully logged in!');
         navigation.navigate('Home');
       } else {
         Alert.alert('Login Failed', data.message || 'Login failed. Please try again.');

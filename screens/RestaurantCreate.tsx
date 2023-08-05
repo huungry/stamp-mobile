@@ -1,11 +1,12 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext, useState } from 'react';
-import { Alert, Button, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { Alert, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { RootStackParamList } from '../App';
 import { AuthContext } from '../AuthContext';
 import { createRestaurant } from '../api/RestaurantService';
 import InputField from '../components/InputField';
-import styles from '../styles/HomeScreenStyles';
+import ProButton from '../components/ProButton';
+import styles from '../styles/RestaurantCreate';
 
 type RestaurantCreateNavigationProp = StackNavigationProp<RootStackParamList, 'RestaurantCreate'>;
 
@@ -47,15 +48,15 @@ const RestaurantCreateScreen = ({ navigation }: Props) => {
       <Image source={require('../assets/restaurant.png')} style={styles.logo} />
       <InputField
         value={email}
-        placeholder="Restaurant email"
+        placeholder="Email"
         onChangeText={(text) => setemail(text)}
       />
       <InputField
         value={name}
-        placeholder="Restaurant name"
+        placeholder="Name"
         onChangeText={(text) => setname(text)}
       />
-      <Button title="Create" onPress={handleCreateRestaurant} />
+      <ProButton title="Create" onPress={handleCreateRestaurant} />
     </KeyboardAvoidingView>
   );
 };

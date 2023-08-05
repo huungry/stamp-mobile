@@ -40,7 +40,7 @@ const HomeScreen = ({ navigation }: Props) => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <StandardButton title="Show restaurants" onPress={handleShowRestaurants} />
+      <StandardButton title="Restaurants" onPress={handleShowRestaurants} />
       <ProButton title="Create restaurant" onPress={handleCreateRestaurant} />
       <StandardButton title="Logout" onPress={handleLogout} />
     </KeyboardAvoidingView>

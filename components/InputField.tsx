@@ -12,7 +12,7 @@ const InputField = ({ value, placeholder, secureTextEntry = false, onChangeText 
     <TextInput
         style={styles.input}
         placeholder={placeholder}
-        placeholderTextColor="#8b4513" // Dark brown placeholder text color
+        placeholderTextColor="#5d4037" // Dark brown placeholder text color
         value={value}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
@@ -20,27 +20,23 @@ const InputField = ({ value, placeholder, secureTextEntry = false, onChangeText 
 );
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        width: '100%',
-        marginBottom: 15,
-        alignItems: 'center', // Center the input horizontally
-    },
     input: {
         width: 280, // Fixed width
         height: 50, // Fixed height
-        backgroundColor: '#e4d5b7', // Light cream background color
-        color: '#8b4513', // Dark brown text color
+        backgroundColor: '#f5f0e1', // Light coffee color
+        color: '#5d4037', // Dark brown text color
         fontSize: 18,
-        fontFamily: 'Cochin', // Classic font (can be replaced with a custom font)
+        fontFamily: 'Arial', // Standard font (can be replaced with a custom font)
         paddingHorizontal: 15,
         paddingVertical: 10,
-        borderRadius: 5, // Rounded corners
+        borderRadius: 10, // More rounded corners
         borderWidth: 2,
-        borderColor: '#b08552', // Warm gold border
+        borderColor: '#795548', // Coffee color border
         shadowColor: '#000',
         shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
+        marginBottom: 10, // Added margin at the bottom
     },
 });
 

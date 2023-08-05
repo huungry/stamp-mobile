@@ -7,6 +7,11 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems: 'center',
         justifyContent: 'flex-start', // Align items to the top
+    },
+    logo: {
+        width: 200, // Slightly larger logo
+        height: 200,
+        marginBottom: 20,
     }
 });
 

@@ -14,23 +14,22 @@ const StandardButton: React.FC<StandardButtonProps> = ({ onPress, title }) => (
 
 const styles = StyleSheet.create({
   button: {
-    backgroundColor: '#f2e6d9', // Cream color
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 5,
+    backgroundColor: '#f5f0e1', // Light coffee color
+    padding: 15,
+    margin: 10,
+    borderRadius: 50, // Fully rounded shape
     borderWidth: 2,
-    borderColor: '#d4a373', // Warm brown border
-    alignItems: 'center',
-    marginVertical: 5,
+    borderColor: '#795548', // Coffee color border
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    alignItems: 'center',
   },
   buttonText: {
-    color: '#8b4513', // Dark brown text
-    fontSize: 18,
-    fontFamily: 'Cochin', // Classic font (can be replaced with a custom font)
+    color: '#5d4037', // Dark brown text color
+    fontSize: 16,
+    fontFamily: 'Arial', // Script font (can be replaced with a custom font)
   },
 });
 

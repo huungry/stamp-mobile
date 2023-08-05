@@ -1,6 +1,7 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
+import { StatusBar } from 'react-native';
 import { AuthProvider } from './AuthContext';
 import HomeScreen from './screens/Home';
 import LoginScreen from './screens/Login';
@@ -20,16 +21,30 @@ const Stack = createStackNavigator<RootStackParamList>();
 const App = () => {
   return (
     <AuthProvider>
+      <StatusBar barStyle="dark-content" />
       <NavigationContainer
         theme={{
           colors: {
-            background: '#f8f2e6', // Light cream color to match the retro theme
+            background: '#ede0d4', // Light cream color to match the retro theme
           },
         }}
       >
-        <Stack.Navigator>
+        <Stack.Navigator
+          screenOptions={{
+            headerTitle: '',
+            headerBackTitleVisible: false,
+            headerTintColor: '#5d4037', // Dark brown color
+          }}
+        >
           <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen name="Home" component={HomeScreen} />
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{
+              headerLeft: () => null,
+              gestureEnabled: false,
+            }}
+          />
           <Stack.Screen name="RestaurantList" component={RestaurantListScreen} />
           <Stack.Screen name="RestaurantCreate" component={RestaurantCreateScreen} />
         </Stack.Navigator>

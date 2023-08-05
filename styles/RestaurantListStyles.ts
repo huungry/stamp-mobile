@@ -3,29 +3,29 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#f8f2e6', // Light cream color to match the retro theme
-        padding: 10, // Reduced overall padding
+        backgroundColor: '#ede0d4', // Coffee cream color
+        padding: 10,
         alignItems: 'center',
-        justifyContent: 'flex-start', // Align items to the top
+        justifyContent: 'flex-start',
     },
     item: {
-        backgroundColor: '#e4d5b7', // Light cream color to match the buttons
-        padding: 15, // Balanced padding
+        backgroundColor: '#f5f0e1', // Light coffee color
+        padding: 15,
         marginVertical: 8,
-        marginHorizontal: 0, // No horizontal margin
-        borderRadius: 5, // Rounded corners
+        marginHorizontal: 0,
+        borderRadius: 10, // More rounded corners
         borderWidth: 2,
-        borderColor: '#b08552', // Warm gold border
+        borderColor: '#795548', // Coffee color border
         shadowColor: '#000',
         shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
-        width: '100%', // Set the width to take up the full container width
+        width: '90%', // Slightly less than the full container width for a margin effect
     },
     title: {
-        fontSize: 24, // Slightly smaller font size
-        fontFamily: 'Cochin', // Classic font (can be replaced with a custom font)
-        color: '#8b4513', // Dark brown text color
+        fontSize: 18, // Slightly smaller font size
+        fontFamily: 'Arial', // Standard font (can be replaced with a custom font)
+        color: '#5d4037', // Dark brown text color
     },
 });
 
