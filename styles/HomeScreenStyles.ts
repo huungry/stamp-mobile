@@ -3,10 +3,10 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center',
+        backgroundColor: '#f8f2e6', // Light cream color to match the retro theme
         padding: 20,
-        backgroundColor: '#D1C5A5',
+        alignItems: 'center',
+        justifyContent: 'center',
     },
     logo: {
         width: 150,

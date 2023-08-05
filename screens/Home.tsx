@@ -1,10 +1,10 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useContext, useState } from 'react';
-import { Alert, Button, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import React, { useContext } from 'react';
+import { KeyboardAvoidingView, Platform } from 'react-native';
 import { RootStackParamList } from '../App';
 import { AuthContext } from '../AuthContext';
-import { createRestaurant } from '../api/RestaurantService';
-import InputField from '../components/InputField';
+import ProButton from '../components/ProButton';
+import StandardButton from '../components/StandardButton';
 import styles from '../styles/HomeScreenStyles';
 
 type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
@@ -14,29 +14,20 @@ type Props = {
 };
 
 const HomeScreen = ({ navigation }: Props) => {
-  const [email, setemail] = useState('');
-  const [name, setname] = useState('');
-
   const authContext = useContext(AuthContext);
 
   if (!authContext) {
     throw new Error('AuthContext is undefined. Make sure you are using AuthProvider at a higher level in your app.');
   }
 
-  const { token, setToken } = authContext;
+  const { setToken } = authContext;
 
-  const handleCreateRestaurant = async () => {
-    try {
-      const { response, data } = await createRestaurant(token, email, name);
+  const handleShowRestaurants = () => {
+    navigation.navigate('RestaurantList')
+  };
 
-      if (response.ok) {
-        Alert.alert('Restaurant Created', 'The restaurant was created successfully!');
-      } else {
-        Alert.alert('Creation Failed', data.message || 'Restaurant creation failed. Please try again.');
-      }
-    } catch (error: any) {
-      Alert.alert('Error', error.message || 'An error occurred. Please try again later.');
-    }
+  const handleCreateRestaurant = () => {
+    navigation.navigate('RestaurantCreate')
   };
 
   const handleLogout = () => {
@@ -49,19 +40,9 @@ const HomeScreen = ({ navigation }: Props) => {
       behavior={Platform.OS === "ios" ? "padding" : "height"}
       style={styles.container}
     >
-      <Image source={require('../assets/restaurant.png')} style={styles.logo} />
-      <InputField
-        value={email}
-        placeholder="Restaurant email"
-        onChangeText={(text) => setemail(text)}
-      />
-      <InputField
-        value={name}
-        placeholder="Restaurant name"
-        onChangeText={(text) => setname(text)}
-      />
-      <Button title="Create Restaurant" onPress={handleCreateRestaurant} />
-      <Button title="Logout" onPress={handleLogout} />
+      <StandardButton title="Show restaurants" onPress={handleShowRestaurants} />
+      <ProButton title="Create restaurant" onPress={handleCreateRestaurant} />
+      <StandardButton title="Logout" onPress={handleLogout} />
     </KeyboardAvoidingView>
   );
 };

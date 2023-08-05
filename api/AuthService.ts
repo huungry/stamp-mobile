@@ -1,5 +1,9 @@
+import getEnvVars from '../config';
+
+const { API_URL } = getEnvVars();
+
 export const login = async (email: string, password: string) => {
-    const response = await fetch('http://192.168.0.185:9000/auth/login', {
+    const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

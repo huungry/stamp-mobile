@@ -1,10 +1,11 @@
 import { StackNavigationProp } from '@react-navigation/stack';
 import React, { useContext, useState } from 'react';
-import { Alert, Button, Image, KeyboardAvoidingView, Platform } from 'react-native';
+import { Alert, Image, KeyboardAvoidingView, Platform } from 'react-native';
 import { RootStackParamList } from '../App';
 import { AuthContext } from '../AuthContext';
 import { login } from '../api/AuthService';
 import InputField from '../components/InputField';
+import StandardButton from '../components/StandardButton';
 import styles from '../styles/LoginScreenStyles';
 
 type LoginScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Login'>;
@@ -31,11 +32,12 @@ const LoginScreen = ({ navigation }: Props) => {
       if (response.ok) {
         setToken(data.token);
         Alert.alert('Login Successful', 'You have successfully logged in!');
-        navigation.navigate('RestaurantList');
+        navigation.navigate('Home');
       } else {
         Alert.alert('Login Failed', data.message || 'Login failed. Please try again.');
       }
     } catch (error) {
+      console.log(error)
       Alert.alert('Error', 'An error occurred. Please try again later.');
     }
   };
@@ -57,7 +59,7 @@ const LoginScreen = ({ navigation }: Props) => {
         secureTextEntry={true}
         onChangeText={(text) => setPassword(text)}
       />
-      <Button title="Login" onPress={handleLogin} />
+      <StandardButton title="Login" onPress={handleLogin} />
     </KeyboardAvoidingView>
   );
 };
