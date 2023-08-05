@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     proButtonText: {
         color: '#5d4037', // Dark brown text color
         fontSize: 16,
-        fontFamily: 'Arial' // Standard font (can be replaced with a custom font)
     },
 });
 

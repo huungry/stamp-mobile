@@ -7,7 +7,12 @@ const styles = StyleSheet.create({
         padding: 20,
         alignItems: 'center',
         justifyContent: 'flex-start', // Align items to the top
-    }
+    },
+    greeting: {
+        fontSize: 20,  // adjust size as necessary
+        fontWeight: 'bold',
+        marginBottom: 20,  // add some space below the greeting
+    },
 });
 
 export default styles;

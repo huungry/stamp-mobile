@@ -26,7 +26,6 @@ const styles = StyleSheet.create({
         backgroundColor: '#f5f0e1', // Light coffee color
         color: '#5d4037', // Dark brown text color
         fontSize: 18,
-        fontFamily: 'Arial', // Standard font (can be replaced with a custom font)
         paddingHorizontal: 15,
         paddingVertical: 10,
         borderRadius: 10, // More rounded corners
