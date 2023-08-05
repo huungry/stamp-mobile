@@ -6,6 +6,7 @@ import { AuthContext } from '../AuthContext';
 import { findMe } from '../api/UserService';
 import LogoutButton from '../components/LogoutButton';
 import ProButton from '../components/ProButton';
+import QRCodeComponent from '../components/QrCode';
 import StandardButton from '../components/StandardButton';
 import { UserRole, UserView } from '../interfaces/User';
 import styles from '../styles/HomeScreenStyles';
@@ -60,8 +61,9 @@ const HomeScreen = ({ navigation }: Props) => {
       style={styles.container}
     >
       <Text style={styles.greeting}>Hello, {user?.firstName}!</Text>
-      <StandardButton title="Restaurants" onPress={handleShowRestaurants} />
+      <StandardButton title="Stamps" onPress={handleShowRestaurants} />
       {user?.role === UserRole.Pro && <ProButton title="Manage" onPress={handleCreateRestaurant} />}
+      {user && <QRCodeComponent value={user.id} />}
       <View style={{ flex: 1 }} />
       <LogoutButton title="Logout" onPress={handleLogout} />
     </KeyboardAvoidingView>

@@ -11,6 +11,7 @@ const styles = StyleSheet.create({
     greeting: {
         fontSize: 20,  // adjust size as necessary
         fontWeight: 'bold',
+        color: '#795548',
         marginBottom: 20,  // add some space below the greeting
     },
 });
