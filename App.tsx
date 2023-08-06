@@ -7,12 +7,14 @@ import HomeScreen from './screens/Home';
 import LoginScreen from './screens/Login';
 import RestaurantCreateScreen from './screens/RestaurantCreate';
 import RestaurantListScreen from './screens/RestaurantList';
+import SettingsScreen from './screens/Settings';
 
 type RootStackParamList = {
   Home: undefined,
   Login: undefined,
   RestaurantList: undefined,
   RestaurantCreate: undefined,
+  Settings: undefined,
   Profile: { name: string };
 };
 
@@ -47,6 +49,7 @@ const App = () => {
           />
           <Stack.Screen name="RestaurantList" component={RestaurantListScreen} />
           <Stack.Screen name="RestaurantCreate" component={RestaurantCreateScreen} />
+          <Stack.Screen name="Settings" component={SettingsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
     </AuthProvider>

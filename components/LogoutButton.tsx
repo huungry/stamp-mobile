@@ -14,12 +14,10 @@ const LogoutButton: React.FC<LogoutButtonProps> = ({ onPress, title }) => (
 
 const styles = StyleSheet.create({
   button: {
+    width: '100%',
     backgroundColor: '#A1887F', // Light coffee color
     padding: 15,
     marginBottom: 50,  // Adjust this value as needed
-    borderRadius: 50, // Fully rounded shape
-    borderWidth: 2,
-    borderColor: '#f5f0e1', // Coffee color border
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.2,

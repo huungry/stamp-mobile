@@ -1,12 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
+import Feather from 'react-native-vector-icons/Feather';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { AuthContext } from '../AuthContext';
 import { findMe } from '../api/UserService';
 import QRCodeComponent from '../components/QrCode';
 import { UserRole, UserView } from '../interfaces/User';
+import Settings from '../screens/Settings';
 import RestaurantCreate from './RestaurantCreate';
 import RestaurantList from './RestaurantList';
 
@@ -26,13 +28,15 @@ const HomeScreen = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchUser = async () => {
-      const { data } = await findMe(token);
-      setUser(data);
-      setLoading(false);
-    };
+    if (token && token !== '') {
+      const fetchUser = async () => {
+        const { data } = await findMe(token);
+        setUser(data);
+        setLoading(false);
+      };
 
-    fetchUser();
+      fetchUser();
+    }
   }, [token]);
 
   if (loading) {
@@ -42,9 +46,12 @@ const HomeScreen = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: '#795548',
+        tabBarInactiveTintColor: '#795548',
+        tabBarActiveTintColor: '#b8860b',
+        headerTitleStyle: { color: "#795548", fontSize: 26 },
       }}>
       {user && <Tab.Screen name="QR Code" options={{
+        title: `Hello, ${user.firstName} 👋🏼`,
         tabBarLabel: 'QR Code',
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="qrcode" color={color} size={size} />
@@ -64,6 +71,16 @@ const HomeScreen = () => {
           <MaterialIcons name="admin-panel-settings" color={color} size={size} />
         ),
       }} />}
+      <Tab.Screen
+        name="Settings"
+        component={Settings}
+        options={{
+          tabBarLabel: 'Settings',
+          tabBarIcon: ({ color, size }) => (
+            <Feather name="settings" color={color} size={size} />
+          ),
+        }}
+      />
     </Tab.Navigator>
   );
 };

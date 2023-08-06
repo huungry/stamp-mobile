@@ -15,21 +15,23 @@ const RestaurantListScreen = () => {
     const { token } = authContext;
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const { response, data } = await getRestaurants(token);
+        if (token && token !== '') {
+            const fetchData = async () => {
+                try {
+                    const { response, data } = await getRestaurants(token);
 
-                if (response.ok) {
-                    setRestaurants(data);
-                } else {
-                    Alert.alert('Failed to Fetch Restaurants', data.message || 'Failed to fetch restaurants. Please try again.');
+                    if (response.ok) {
+                        setRestaurants(data);
+                    } else {
+                        Alert.alert('Failed to Fetch Restaurants', data.message || 'Failed to fetch restaurants. Please try again.');
+                    }
+                } catch (error: any) {
+                    Alert.alert('Error', error.message || 'An error occurred. Please try again later.');
                 }
-            } catch (error: any) {
-                Alert.alert('Error', error.message || 'An error occurred. Please try again later.');
-            }
-        };
+            };
 
-        fetchData();
+            fetchData();
+        }
     }, [token]);
 
     const renderItem = ({ item }: { item: any }) => (
