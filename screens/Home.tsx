@@ -1,23 +1,19 @@
-import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useContext, useEffect, useState } from 'react';
-import { ActivityIndicator, KeyboardAvoidingView, Platform, Text, View } from 'react-native';
-import { RootStackParamList } from '../App';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { useContext, useEffect, useState } from 'react';
+import { ActivityIndicator } from 'react-native';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { AuthContext } from '../AuthContext';
 import { findMe } from '../api/UserService';
-import LogoutButton from '../components/LogoutButton';
-import ProButton from '../components/ProButton';
 import QRCodeComponent from '../components/QrCode';
-import StandardButton from '../components/StandardButton';
 import { UserRole, UserView } from '../interfaces/User';
-import styles from '../styles/HomeScreenStyles';
+import RestaurantCreate from './RestaurantCreate';
+import RestaurantList from './RestaurantList';
 
-type HomeScreenNavigationProp = StackNavigationProp<RootStackParamList, 'Home'>;
+// Define your Tab navigator
+const Tab = createBottomTabNavigator();
 
-type Props = {
-  navigation: HomeScreenNavigationProp;
-};
-
-const HomeScreen = ({ navigation }: Props) => {
+const HomeScreen = () => {
   const authContext = useContext(AuthContext);
 
   if (!authContext) {
@@ -39,34 +35,36 @@ const HomeScreen = ({ navigation }: Props) => {
     fetchUser();
   }, [token]);
 
-  const handleShowRestaurants = () => {
-    navigation.navigate('RestaurantList')
-  };
-
-  const handleCreateRestaurant = () => {
-    navigation.navigate('RestaurantCreate')
-  };
-
-  const handleLogout = () => {
-    navigation.navigate('Login')
-  };
-
   if (loading) {
     return <ActivityIndicator size="large" color="#0000ff" />;
   }
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={styles.container}
-    >
-      <Text style={styles.greeting}>Hello, {user?.firstName}!</Text>
-      <StandardButton title="Stamps" onPress={handleShowRestaurants} />
-      {user?.role === UserRole.Pro && <ProButton title="Manage" onPress={handleCreateRestaurant} />}
-      {user && <QRCodeComponent value={user.id} />}
-      <View style={{ flex: 1 }} />
-      <LogoutButton title="Logout" onPress={handleLogout} />
-    </KeyboardAvoidingView>
+    <Tab.Navigator
+      screenOptions={{
+        tabBarActiveTintColor: '#795548',
+      }}>
+      {user && <Tab.Screen name="QR Code" options={{
+        tabBarLabel: 'QR Code',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="qrcode" color={color} size={size} />
+        ),
+      }}>
+        {() => <QRCodeComponent value={user.id} />}
+      </Tab.Screen>}
+      <Tab.Screen name="Stamps" component={RestaurantList} options={{
+        tabBarLabel: 'Stamps',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialCommunityIcons name="stamper" color={color} size={size} />
+        ),
+      }} />
+      {user?.role === UserRole.Pro && <Tab.Screen name="Manage" component={RestaurantCreate} options={{
+        tabBarLabel: 'Manage',
+        tabBarIcon: ({ color, size }) => (
+          <MaterialIcons name="admin-panel-settings" color={color} size={size} />
+        ),
+      }} />}
+    </Tab.Navigator>
   );
 };
 
