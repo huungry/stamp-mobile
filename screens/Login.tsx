@@ -27,17 +27,16 @@ const LoginScreen = ({ navigation }: Props) => {
 
   const handleLogin = async () => {
     try {
-      const { response, data } = await login(email, password);
+      const { data } = await login(email, password);
 
-      if (response.ok) {
+      if ('token' in data) {
         setToken(data.token);
         navigation.navigate('Home');
       } else {
         Alert.alert('Login Failed', data.message || 'Login failed. Please try again.');
       }
-    } catch (error) {
-      console.log(error)
-      Alert.alert('Error', 'An error occurred. Please try again later.');
+    } catch (error: any) {
+      Alert.alert('Error', error.message || 'An error occurred. Please try again later.');
     }
   };
 

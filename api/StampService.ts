@@ -1,10 +1,10 @@
 import getEnvVars from '../config';
-import { UserView } from '../interfaces/User';
+import { StampsViewResponse } from '../interfaces/Stamp';
 
 const { API_URL } = getEnvVars();
 
-export const findMe = async (token: string) => {
-    const response = await fetch(`${API_URL}/accounts/users/me`, {
+export const listStamps = async (token: string) => {
+    const response = await fetch(`${API_URL}/restaurants/stamps`, {
         method: 'GET',
         headers: {
             'Authorization': `Bearer ${token}`,
@@ -13,7 +13,7 @@ export const findMe = async (token: string) => {
         }
     });
 
-    const data: UserView = await response.json();
+    const data: StampsViewResponse = await response.json();
     return { response, data };
 };
 

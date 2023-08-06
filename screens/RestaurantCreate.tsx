@@ -28,12 +28,13 @@ const RestaurantCreateScreen = ({ navigation }: Props) => {
 
   const handleCreateRestaurant = async () => {
     try {
-      const { response, data } = await createRestaurant(token, email, name);
+      const { data } = await createRestaurant(token, email, name);
 
-      if (response.ok) {
+      if ('email' in data) {
         Alert.alert('Restaurant Created', 'The restaurant was created successfully!');
+        navigation.navigate('Manage');
       } else {
-        Alert.alert('Creation Failed', data.message || 'Restaurant creation failed. Please try again.');
+        Alert.alert('Creation Failed', data.message);
       }
     } catch (error: any) {
       Alert.alert('Error', error.message || 'An error occurred. Please try again later.');

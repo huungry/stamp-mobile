@@ -1,4 +1,5 @@
 import getEnvVars from '../config';
+import { LoginResponse } from '../interfaces/Login';
 
 const { API_URL } = getEnvVars();
 
@@ -15,6 +16,6 @@ export const login = async (email: string, password: string) => {
         }),
     });
 
-    const data = await response.json();
+    const data: LoginResponse = await response.json();
     return { response, data };
 };

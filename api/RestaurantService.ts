@@ -1,4 +1,5 @@
 import getEnvVars from '../config';
+import { CreateRestaurantResponse } from '../interfaces/Restaurant';
 
 const { API_URL } = getEnvVars();
 
@@ -16,7 +17,7 @@ export const createRestaurant = async (token: string, email: string, name: strin
         }),
     });
 
-    const data = await response.json();
+    const data: CreateRestaurantResponse = await response.json();
     return { response, data };
 };
 

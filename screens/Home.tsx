@@ -9,8 +9,8 @@ import { findMe } from '../api/UserService';
 import QRCodeComponent from '../components/QrCode';
 import { UserRole, UserView } from '../interfaces/User';
 import Settings from '../screens/Settings';
-import RestaurantCreate from './RestaurantCreate';
-import RestaurantList from './RestaurantList';
+import ManageScreen from './Manage';
+import StampList from './StampList';
 
 // Define your Tab navigator
 const Tab = createBottomTabNavigator();
@@ -40,7 +40,7 @@ const HomeScreen = () => {
   }, [token]);
 
   if (loading) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
+    return <ActivityIndicator size="large" color="#795548" />;
   }
 
   return (
@@ -48,7 +48,7 @@ const HomeScreen = () => {
       screenOptions={{
         tabBarInactiveTintColor: '#795548',
         tabBarActiveTintColor: '#b8860b',
-        headerTitleStyle: { color: "#795548", fontSize: 26 },
+        headerTitleStyle: { color: "#795548", fontSize: 26, paddingBottom: 50 },
       }}>
       {user && <Tab.Screen name="QR Code" options={{
         title: `Hello, ${user.firstName} 👋🏼`,
@@ -59,13 +59,14 @@ const HomeScreen = () => {
       }}>
         {() => <QRCodeComponent value={user.id} />}
       </Tab.Screen>}
-      <Tab.Screen name="Stamps" component={RestaurantList} options={{
+      <Tab.Screen name="Stamps" component={StampList} options={{
+        title: 'My stamps',
         tabBarLabel: 'Stamps',
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="stamper" color={color} size={size} />
         ),
       }} />
-      {user?.role === UserRole.Pro && <Tab.Screen name="Manage" component={RestaurantCreate} options={{
+      {user?.role === UserRole.Pro && <Tab.Screen name="Manage" component={ManageScreen} options={{
         tabBarLabel: 'Manage',
         tabBarIcon: ({ color, size }) => (
           <MaterialIcons name="admin-panel-settings" color={color} size={size} />

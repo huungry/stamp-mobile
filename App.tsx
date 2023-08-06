@@ -5,6 +5,7 @@ import { StatusBar } from 'react-native';
 import { AuthProvider } from './AuthContext';
 import HomeScreen from './screens/Home';
 import LoginScreen from './screens/Login';
+import ManageScreen from './screens/Manage';
 import RestaurantCreateScreen from './screens/RestaurantCreate';
 import RestaurantListScreen from './screens/RestaurantList';
 import SettingsScreen from './screens/Settings';
@@ -14,6 +15,7 @@ type RootStackParamList = {
   Login: undefined,
   RestaurantList: undefined,
   RestaurantCreate: undefined,
+  Manage: undefined,
   Settings: undefined,
   Profile: { name: string };
 };
@@ -47,8 +49,9 @@ const App = () => {
               gestureEnabled: false,
             }}
           />
-          <Stack.Screen name="RestaurantList" component={RestaurantListScreen} />
           <Stack.Screen name="RestaurantCreate" component={RestaurantCreateScreen} />
+          <Stack.Screen name="RestaurantList" component={RestaurantListScreen} />
+          <Stack.Screen name="Manage" component={ManageScreen} />
           <Stack.Screen name="Settings" component={SettingsScreen} />
         </Stack.Navigator>
       </NavigationContainer>
