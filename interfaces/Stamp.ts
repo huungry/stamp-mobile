@@ -4,6 +4,7 @@ export interface StampsView {
     restaurantId: string;
     restaurantName: string;
     count: number;
+    stampsToReward?: number;
 }
 
 export interface StampsViewSuccessResponse {
