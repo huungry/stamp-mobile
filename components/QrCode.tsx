@@ -16,7 +16,7 @@ const QRCodeComponent: React.FC<QRCodeProps> = ({ value }) => (
 const styles = StyleSheet.create({
     qrCodeContainer: {
         padding: 15,
-        borderWidth: 2,
+        borderWidth: 1,
         borderLeftWidth: 0,
         borderRightWidth: 0,
         borderColor: '#795548', // Coffee color border

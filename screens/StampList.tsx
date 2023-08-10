@@ -43,15 +43,38 @@ const StampList = () => {
         onRewardPress?: () => void; // Callback for when an active row is pressed
     }
 
+    const generateEmojisString = (emoji: string, count: number, rowLenght: number) => {
+        let result = '';
+        for (let i = 0; i < count; i++) {
+            if (i > 0 && i % rowLenght === 0) {
+                result += '\n';
+            }
+            result += emoji;
+        }
+        return result;
+    };
+
     const StampRow = ({ restaurantName, count, stampsToReward, onRewardPress }: StampRowProps) => {
-        const RowComponent = stampsToReward ? TouchableOpacity : View;
+        const canCollect = stampsToReward && stampsToReward <= count;
+        const RowComponent = canCollect ? TouchableOpacity : View;
 
         return (
-            <RowComponent style={(stampsToReward && stampsToReward <= count) ? styles.activeRow : styles.inactiveRow} onPress={onRewardPress}>
+            <View style={canCollect ? styles.activeRow : styles.inactiveRow}>
                 <Text style={styles.cell}>{restaurantName.toUpperCase()}</Text>
-                <Text style={styles.cell}>{count}</Text>
-                {stampsToReward && stampsToReward <= count ? <Text style={styles.cell}>&#x1F389; Collect reward now &#x1F389; </Text> : null}
-            </RowComponent>
+                <View style={styles.line} />
+                <Text style={styles.cellEmoji}>{generateEmojisString('\u2615', count, 4)}</Text>
+                {
+                    canCollect
+                        ? (
+                            <TouchableOpacity onPress={onRewardPress}>
+                                <Text style={styles.cellCollect}>Collect</Text>
+                            </TouchableOpacity>
+                        )
+                        : stampsToReward
+                            ? <Text style={styles.cell}>Only {stampsToReward - count} more needed for reward &#x1F44F;</Text>
+                            : null
+                }
+            </View>
         );
     };
 

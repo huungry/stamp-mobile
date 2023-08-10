@@ -48,7 +48,7 @@ const HomeScreen = () => {
       screenOptions={{
         tabBarInactiveTintColor: '#795548',
         tabBarActiveTintColor: '#b8860b',
-        headerTitleStyle: { color: "#795548", fontSize: 26, paddingBottom: 50 },
+        headerTitleStyle: { color: "#795548", fontSize: 26, paddingBottom: 50 }
       }}>
       {user && <Tab.Screen name="QR Code" options={{
         title: `Hello, ${user.firstName} 👋🏼`,
@@ -60,7 +60,7 @@ const HomeScreen = () => {
         {() => <QRCodeComponent value={user.id} />}
       </Tab.Screen>}
       <Tab.Screen name="Stamps" component={StampList} options={{
-        title: 'My stamps',
+        title: 'Stamps',
         tabBarLabel: 'Stamps',
         tabBarIcon: ({ color, size }) => (
           <MaterialCommunityIcons name="stamper" color={color} size={size} />

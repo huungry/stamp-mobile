@@ -14,17 +14,18 @@ const ProButton: React.FC<ProButtonProps> = ({ onPress, title }) => (
 
 const styles = StyleSheet.create({
     proButton: {
-        backgroundColor: '#D4AF37', // Gold color
+        width: '100%',
+        backgroundColor: '#f5f0e1', // Light coffee color
         padding: 15,
-        margin: 10,
-        borderRadius: 50, // Fully rounded shape
-        borderWidth: 2,
-        borderColor: '#795548', // Coffee color border
+        marginBottom: 2,  // Adjust this value as needed
         shadowColor: '#000',
         shadowOffset: { width: 2, height: 2 },
         shadowOpacity: 0.2,
         shadowRadius: 3,
         alignItems: 'center',
+        borderLeftWidth: 0,
+        borderRightWidth: 0,
+        borderColor: '#795548', // Coffee color border
     },
     proButtonText: {
         color: '#5d4037', // Dark brown text color
