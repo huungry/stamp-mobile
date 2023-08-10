@@ -31,7 +31,7 @@ const LoginScreen = ({ navigation }: Props) => {
 
       if ('token' in data) {
         setToken(data.token);
-        navigation.navigate('Home');
+        navigation.navigate('HomeTabs');
       } else {
         Alert.alert('Login Failed', data.message || 'Login failed. Please try again.');
       }

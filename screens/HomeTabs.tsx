@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { createStackNavigator } from '@react-navigation/stack';
 import { useContext, useEffect, useState } from 'react';
 import { ActivityIndicator } from 'react-native';
 import Feather from 'react-native-vector-icons/Feather';
@@ -10,12 +11,34 @@ import QRCodeComponent from '../components/QrCode';
 import { UserRole, UserView } from '../interfaces/User';
 import Settings from '../screens/Settings';
 import ManageScreen from './Manage';
+import RestaurantListScreen from './RestaurantList';
 import StampList from './StampList';
 
-// Define your Tab navigator
 const Tab = createBottomTabNavigator();
+const HomeStack = createStackNavigator();
 
-const HomeScreen = () => {
+function ManageStackNavigator() {
+  return (
+    <HomeStack.Navigator
+      screenOptions={{
+        headerTitle: '',
+        headerShown: false,
+        headerBackTitleVisible: false,
+        headerTintColor: '#5d4037',
+      }}>
+      <HomeStack.Screen name="Manage" component={ManageScreen} options={{
+        headerLeft: () => null,
+        gestureEnabled: false,
+      }} />
+      <HomeStack.Screen name="RestaurantList" component={RestaurantListScreen} options={{
+        headerLeft: () => null,
+        gestureEnabled: true,
+      }} />
+    </HomeStack.Navigator>
+  );
+}
+
+const HomeTabs = () => {
   const authContext = useContext(AuthContext);
 
   if (!authContext) {
@@ -50,32 +73,48 @@ const HomeScreen = () => {
         tabBarActiveTintColor: '#b8860b',
         headerTitleStyle: { color: "#795548", fontSize: 26, paddingBottom: 50 }
       }}>
-      {user && <Tab.Screen name="QR Code" options={{
-        title: `Hello, ${user.firstName} 👋🏼`,
-        tabBarLabel: 'QR Code',
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="qrcode" color={color} size={size} />
-        ),
-      }}>
+      {user && <Tab.Screen
+        name="QR Code"
+        options={{
+          title: `Hello, ${user.firstName} 👋🏼`,
+          tabBarLabel: 'QR Code',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="qrcode" color={color} size={size} />
+          ),
+        }}
+      >
         {() => <QRCodeComponent value={user.id} />}
       </Tab.Screen>}
-      <Tab.Screen name="Stamps" component={StampList} options={{
-        title: 'Stamps',
-        tabBarLabel: 'Stamps',
-        tabBarIcon: ({ color, size }) => (
-          <MaterialCommunityIcons name="stamper" color={color} size={size} />
-        ),
-      }} />
-      {user?.role === UserRole.Pro && <Tab.Screen name="Manage" component={ManageScreen} options={{
-        tabBarLabel: 'Manage',
-        tabBarIcon: ({ color, size }) => (
-          <MaterialIcons name="admin-panel-settings" color={color} size={size} />
-        ),
-      }} />}
+
+      <Tab.Screen
+        name="Stamps"
+        component={StampList}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Stamps',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="stamper" color={color} size={size} />
+          ),
+        }}
+      />
+
+      {user?.role === UserRole.Pro && <Tab.Screen
+        name="ManageTabs"
+        component={ManageStackNavigator}
+        options={{
+          headerShown: false,
+          tabBarLabel: 'Manage',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialIcons name="admin-panel-settings" color={color} size={size} />
+          ),
+        }}
+      />}
+
       <Tab.Screen
         name="Settings"
         component={Settings}
         options={{
+          headerShown: false,
           tabBarLabel: 'Settings',
           tabBarIcon: ({ color, size }) => (
             <Feather name="settings" color={color} size={size} />
@@ -86,4 +125,4 @@ const HomeScreen = () => {
   );
 };
 
-export default HomeScreen;
+export default HomeTabs;

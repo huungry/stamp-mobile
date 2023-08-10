@@ -3,24 +3,19 @@ import { createStackNavigator } from '@react-navigation/stack';
 import React from 'react';
 import { StatusBar } from 'react-native';
 import { AuthProvider } from './AuthContext';
-import HomeScreen from './screens/Home';
+import HomeTabs from './screens/HomeTabs'; // Renamed from HomeScreen
 import LoginScreen from './screens/Login';
-import ManageScreen from './screens/Manage';
 import RestaurantCreateScreen from './screens/RestaurantCreate';
-import RestaurantListScreen from './screens/RestaurantList';
-import SettingsScreen from './screens/Settings';
 
 type RootStackParamList = {
-  Home: undefined,
+  HomeTabs: undefined, // Renamed from Home
   Login: undefined,
-  RestaurantList: undefined,
   RestaurantCreate: undefined,
-  Manage: undefined,
-  Settings: undefined,
+  // Removed other screen declarations since they will be part of HomeTabs now
   Profile: { name: string };
 };
 
-const Stack = createStackNavigator<RootStackParamList>();
+const MainStack = createStackNavigator<RootStackParamList>();
 
 const App = () => {
   return (
@@ -29,35 +24,32 @@ const App = () => {
       <NavigationContainer
         theme={{
           colors: {
-            background: '#ede0d4', // Light cream color to match the retro theme
+            background: '#ede0d4',
           },
         }}
       >
-        <Stack.Navigator
+        <MainStack.Navigator
           screenOptions={{
             headerTitle: '',
             headerBackTitleVisible: false,
-            headerTintColor: '#5d4037', // Dark brown color
+            headerTintColor: '#5d4037',
           }}
         >
-          <Stack.Screen name="Login" component={LoginScreen} />
-          <Stack.Screen
-            name="Home"
-            component={HomeScreen}
+          <MainStack.Screen name="Login" component={LoginScreen} />
+          <MainStack.Screen
+            name="HomeTabs"
+            component={HomeTabs}
             options={{
               headerLeft: () => null,
               gestureEnabled: false,
             }}
           />
-          <Stack.Screen name="RestaurantCreate" component={RestaurantCreateScreen} />
-          <Stack.Screen name="RestaurantList" component={RestaurantListScreen} />
-          <Stack.Screen name="Manage" component={ManageScreen} />
-          <Stack.Screen name="Settings" component={SettingsScreen} />
-        </Stack.Navigator>
+          <MainStack.Screen name="RestaurantCreate" component={RestaurantCreateScreen} />
+          {/* ... other screens */}
+        </MainStack.Navigator>
       </NavigationContainer>
     </AuthProvider>
   );
 };
 
-export type { RootStackParamList };
 export default App;
