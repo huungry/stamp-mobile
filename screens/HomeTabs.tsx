@@ -70,8 +70,8 @@ const HomeTabs = () => {
     <Tab.Navigator
       screenOptions={{
         tabBarInactiveTintColor: '#8d8c8f',
-        tabBarActiveTintColor: '#e27854',
-        headerTitleStyle: { color: "#e27854", fontSize: 26, paddingBottom: 50 }
+        tabBarActiveTintColor: '#e38262',
+        headerTitleStyle: { color: "#e38262", fontSize: 26, paddingBottom: 50 }
       }}>
       {user && <Tab.Screen
         name="QR Code"

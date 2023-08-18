@@ -9,13 +9,14 @@ interface QRCodeProps {
 const QRCodeComponent: React.FC<QRCodeProps> = ({ value }) => (
     <View style={styles.qrCodeContainer}>
         <QRCode value={value} size={200} color="#01000c" backgroundColor="#ffffff" />
-        <Text style={{ marginTop: 25, color: "#e27854" }}>{value}</Text>
+        <Text style={{ marginTop: 25, color: "#a6a5a7" }}>{value}</Text>
     </View>
 );
 
 const styles = StyleSheet.create({
     qrCodeContainer: {
         padding: 25,
+        paddingBottom: 20,
         borderWidth: 0.5,
         borderLeftWidth: 1,
         borderRightWidth: 1,
