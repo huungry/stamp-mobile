@@ -24,7 +24,7 @@ const App = () => {
       <NavigationContainer
         theme={{
           colors: {
-            background: '#ede0d4',
+            background: '#eeece9',
           },
         }}
       >

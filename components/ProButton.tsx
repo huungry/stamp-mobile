@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
         borderColor: '#795548', // Coffee color border
     },
     proButtonText: {
-        color: '#5d4037', // Dark brown text color
+        color: '#01000c', // Dark brown text color
         fontSize: 16,
     },
 });

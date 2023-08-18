@@ -3,7 +3,7 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ede0d4', // Coffee cream color
+        backgroundColor: '#eeece9', // Coffee cream color
         padding: 20,
         alignItems: 'center',
         justifyContent: 'flex-start', // Align content to the top

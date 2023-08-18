@@ -69,14 +69,14 @@ const HomeTabs = () => {
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarInactiveTintColor: '#795548',
-        tabBarActiveTintColor: '#b8860b',
-        headerTitleStyle: { color: "#795548", fontSize: 26, paddingBottom: 50 }
+        tabBarInactiveTintColor: '#8d8c8f',
+        tabBarActiveTintColor: '#e27854',
+        headerTitleStyle: { color: "#e27854", fontSize: 26, paddingBottom: 50 }
       }}>
       {user && <Tab.Screen
         name="QR Code"
         options={{
-          title: `Hello, ${user.firstName} 👋🏼`,
+          title: `Hello, ${user.firstName} 👋`,
           tabBarLabel: 'QR Code',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="qrcode" color={color} size={size} />

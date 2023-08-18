@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonText: {
-    color: '#f5f0e1', // Dark brown text color
+    color: '#01000c', // Dark brown text color
     fontSize: 16,
   },
 });
