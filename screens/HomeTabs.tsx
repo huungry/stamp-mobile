@@ -7,7 +7,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { AuthContext } from '../AuthContext';
 import { findMe } from '../api/UserService';
-import QRCodeComponent from '../components/QrCode';
+import QRWithText from '../components/QrCode';
 import { UserRole, UserView } from '../interfaces/User';
 import Settings from '../screens/Settings';
 import ManageScreen from './Manage';
@@ -73,18 +73,18 @@ const HomeTabs = () => {
         tabBarActiveTintColor: '#e38262',
         headerTitleStyle: { color: "#e38262", fontSize: 26, paddingBottom: 50 }
       }}>
-      {user && <Tab.Screen
+      <Tab.Screen
         name="QR Code"
         options={{
-          title: `Hello, ${user.firstName} 👋`,
+          title: `Hello, ${user?.firstName} 👋`,  // Making sure user is defined using optional chaining
           tabBarLabel: 'QR Code',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="qrcode" color={color} size={size} />
           ),
         }}
       >
-        {() => <QRCodeComponent value={user.id} />}
-      </Tab.Screen>}
+        {() => user ? <QRWithText userId={user.id} /> : null}
+      </Tab.Screen>
 
       <Tab.Screen
         name="Stamps"

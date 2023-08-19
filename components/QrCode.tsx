@@ -1,9 +1,55 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { StyleProp, StyleSheet, Text, TouchableOpacity, View, ViewStyle } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 
 interface QRCodeProps {
     value: string;
+}
+
+interface QRWithTextProps {
+    userId: string;
+    style?: StyleProp<ViewStyle>;
+}
+
+// const QRWithText: React.FC<QRWithTextProps> = ({ userId, style }) => {
+//     return (
+//         <View style={[{ alignItems: 'center', justifyContent: 'flex-start', flex: 1 }, style]}>
+//             <QRCodeComponent value={userId} />
+//             <Text style={{ marginTop: 5, fontSize: 12, color: '#8fabef', marginHorizontal: 50, textAlign: 'center' }}>
+//                 Present this code to the staff to get your stamp 
+//             </Text>
+//         </View>
+//     );
+// }
+
+const QRWithText: React.FC<QRWithTextProps> = ({ userId, style }) => {
+    const [showHelpText, setShowHelpText] = useState(false);
+
+    return (
+        <View style={[{ alignItems: 'center', justifyContent: 'flex-start', flex: 1 }, style]}>
+            <QRCodeComponent value={userId} />
+
+            <TouchableOpacity onPress={() => setShowHelpText(!showHelpText)} style={{
+                marginTop: 30,
+                paddingVertical: 5,
+                paddingHorizontal: 10,
+                borderRadius: 15,
+                borderColor: '#e38262',
+                borderWidth: 0.2,
+                elevation: 5,  // Android elevation
+            }}>
+                <Text style={{ color: '#e38262' }}>{showHelpText ? 'Hide instructions' : 'How to use this QR code?'}</Text>
+            </TouchableOpacity>
+
+            {showHelpText && (
+                <View style={{ marginTop: 10, alignItems: 'center' }}>
+                    <Text style={{ marginTop: 5, fontSize: 12, color: 'gray' }}>
+                        Present this code to the staff to add a stamp to your account.
+                    </Text>
+                </View>
+            )}
+        </View>
+    );
 }
 
 const QRCodeComponent: React.FC<QRCodeProps> = ({ value }) => (
@@ -38,4 +84,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default QRCodeComponent;
+export default QRWithText;
