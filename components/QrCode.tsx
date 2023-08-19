@@ -11,17 +11,6 @@ interface QRWithTextProps {
     style?: StyleProp<ViewStyle>;
 }
 
-// const QRWithText: React.FC<QRWithTextProps> = ({ userId, style }) => {
-//     return (
-//         <View style={[{ alignItems: 'center', justifyContent: 'flex-start', flex: 1 }, style]}>
-//             <QRCodeComponent value={userId} />
-//             <Text style={{ marginTop: 5, fontSize: 12, color: '#8fabef', marginHorizontal: 50, textAlign: 'center' }}>
-//                 Present this code to the staff to get your stamp 
-//             </Text>
-//         </View>
-//     );
-// }
-
 const QRWithText: React.FC<QRWithTextProps> = ({ userId, style }) => {
     const [showHelpText, setShowHelpText] = useState(false);
 

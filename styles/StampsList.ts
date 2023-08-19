@@ -3,34 +3,38 @@ import { StyleSheet } from 'react-native';
 const commonRowStyles = {
     flexDirection: 'column',
     alignItems: 'center',
-    padding: 15,
-    marginVertical: 5,
-    marginHorizontal: 0,
+    padding: 25,
+    paddingBottom: 10,
+    paddingTop: 10,
+    borderWidth: 0.5,
+    borderRadius: 30,
+    borderColor: '#eebc7b',
+    backgroundColor: '#ffffff',
     shadowColor: '#000',
     shadowOffset: { width: 2, height: 2 },
     shadowOpacity: 0.2,
     shadowRadius: 3,
+    marginVertical: 5,
+    marginLeft: 15,
+    marginRight: 15
 };
 
 const styles = StyleSheet.create({
     row: {
         ...commonRowStyles,
-        backgroundColor: '#f5f0e1',
     },
     activeRow: {
         ...commonRowStyles,
-        backgroundColor: '#f5f0e1',
-    },
-    inactiveRow: {
-        ...commonRowStyles,
-        backgroundColor: '#f5f0e1',
     },
     cell: {
         fontSize: 16,
-        color: '#5d4037',
+        color: '#8d8c8f',
         textAlign: 'center',
         marginVertical: 1,
         fontStyle: 'italic',
+    },
+    cellAdditional: {
+        fontSize: 12, color: 'gray', marginHorizontal: 10, marginTop: 5, textAlign: 'center'
     },
     cellEmoji: {
         fontSize: 42,
@@ -42,30 +46,28 @@ const styles = StyleSheet.create({
     cellCollect: {
         fontSize: 16,
         color: 'white',
-        opacity: 0.7,
         textAlign: 'center',
         marginVertical: 7,
-        fontStyle: 'italic',
         paddingVertical: 10,
         paddingHorizontal: 70,
-        backgroundColor: '#C65D7B',  // Adjust this to your preferred button color
+        backgroundColor: '#e38262',
+        opacity: 0.9,
         borderRadius: 20,
         overflow: 'hidden',
         borderWidth: 1,
         borderColor: 'white',
-        shadowColor: '#000',
-        shadowOffset: { width: 1, height: 2 },
-        shadowOpacity: 0.2,
-        shadowRadius: 3,
-        elevation: 3,  // for Android shadow
     },
     line: {
         width: '90%',
         opacity: 0.2,
         backgroundColor: 'black',
-        height: 1,  // or 2 if you want a thicker line
-        marginTop: 5,  // optional: space between the Text and the line
-        marginBottom: 3,  // optional: space below the line
+        height: 1,
+        marginTop: 5,
+        marginBottom: 3,
+    },
+    collectButton: {
+        marginTop: 7,
+        elevation: 3,
     }
 });
 

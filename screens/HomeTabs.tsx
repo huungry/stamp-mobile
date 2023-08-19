@@ -71,7 +71,7 @@ const HomeTabs = () => {
       screenOptions={{
         tabBarInactiveTintColor: '#8d8c8f',
         tabBarActiveTintColor: '#e38262',
-        headerTitleStyle: { color: "#e38262", fontSize: 26, paddingBottom: 50 }
+        headerTitleStyle: { color: "#e38262", fontSize: 26, paddingBottom: 50, fontStyle: 'italic' }
       }}>
       <Tab.Screen
         name="QR Code"
@@ -87,10 +87,9 @@ const HomeTabs = () => {
       </Tab.Screen>
 
       <Tab.Screen
-        name="Stamps"
+        name="It's coffee o'clock!"
         component={StampList}
         options={{
-          headerShown: false,
           tabBarLabel: 'Stamps',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons name="stamper" color={color} size={size} />

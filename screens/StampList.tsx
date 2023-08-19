@@ -56,25 +56,27 @@ const StampList = () => {
 
     const StampRow = ({ restaurantName, count, stampsToReward, onRewardPress }: StampRowProps) => {
         const canCollect = stampsToReward && stampsToReward <= count;
-        const RowComponent = canCollect ? TouchableOpacity : View;
-
         return (
-            <View style={canCollect ? styles.activeRow : styles.inactiveRow}>
+            <View style={canCollect ? styles.activeRow : styles.row}>
                 <Text style={styles.cell}>{restaurantName.toUpperCase()}</Text>
                 <View style={styles.line} />
                 <Text style={styles.cellEmoji}>{generateEmojisString('\u2615', count, 4)}</Text>
+                {canCollect
+                    ? <Text style={styles.cellAdditional}>🎉 Congatulations 🎉</Text>
+                    : null
+                }
                 {
                     canCollect
                         ? (
-                            <TouchableOpacity onPress={onRewardPress}>
+                            <TouchableOpacity onPress={onRewardPress} style={styles.collectButton}>
                                 <Text style={styles.cellCollect}>Collect</Text>
                             </TouchableOpacity>
                         )
                         : stampsToReward
-                            ? <Text style={styles.cell}>Only {stampsToReward - count} more needed for reward &#x1F44F;</Text>
+                            ? <Text style={styles.cellAdditional}>Only {stampsToReward - count} more needed for reward &#x1F44F;</Text>
                             : null
                 }
-            </View>
+            </View >
         );
     };
 
@@ -88,15 +90,13 @@ const StampList = () => {
                     stampsToReward={item.stampsToReward}
                     onRewardPress={() => {
                         if (item.stampsToReward && item.stampsToReward <= item.count) {
-                            // Handle the reward collection for the active restaurant
                             console.log(`Collecting reward for: ${item.restaurantName}`);
                         }
                     }}
                 />
-            )
-            }
+            )}
             keyExtractor={(item) => item.restaurantId.toString()}
-            ListHeaderComponent={< View style={{ height: 30 }} />}
+            ListHeaderComponent={<View style={{ height: 30 }} />}
         />
     );
 }
